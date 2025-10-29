@@ -1,38 +1,40 @@
-// gsap
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// selector
 const panels = gsap.utils.toArray("#fullpage .section");
 
-// snap to section
-function goToSection(panel, index) {
-    gsap.to(window, {
-      scrollTo: { y: panel, autoKill: false },
-      duration: 1,
-      ease: "power2.out",
-    });
+function goToSection(panel) {
+  gsap.to(window, {
+    scrollTo: { y: panel, autoKill: false },
+    duration: 1,
+    ease: "power2.out",
+  });
 }
-// snap on scroll
-function snapIn(index) {
+
+function setCropped(target) {
+  panels.forEach(p => p.classList.remove("cropped"));
+  target.classList.add("cropped");
+}
+
+function snapIn() {
   const tlSnapIn = gsap.timeline();
-    panels.forEach((panel, i) => {
-      tlSnapIn.to(panel, {
-        duration: 1,
-        scrollTrigger: {
-          trigger: panel,
-          onEnter: () => goToSection(panel),
-          onEnterBack: () => goToSection(panel)
-        }
-      })
+  panels.forEach(panel => {
+    tlSnapIn.to(panel, {
+      duration: 1,
+      scrollTrigger: {
+        trigger: panel,
+        onEnter: () => { goToSection(panel); setCropped(panel); },
+        onEnterBack: () => { goToSection(panel); setCropped(panel); }
+      }
     });
+  });
   return tlSnapIn;
 }
-// main timeline
-function initPanelTl(index) {
+
+function initPanelTl() {
   const tl = gsap.timeline();
-  const snap = snapIn(index);
+  const snap = snapIn();
   tl.add(snap);
   return tl;
 }
-// run timeline
+
 initPanelTl();

@@ -118,6 +118,7 @@ body {
 .section-3.cropped::before,
 .section-4.cropped::before {
   background-position: center -130px;
+  border: 3px solid blue;
 }
 
 /* 텍스트박스 시작*/
