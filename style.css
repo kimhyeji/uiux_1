@@ -90,7 +90,6 @@ body {
   transition: background-position 600ms ease;
   z-index: 0;
   pointer-events: none;
-  border: 1px solid red;
 }
 
 .section.section-1::before {
@@ -118,7 +117,6 @@ body {
 .section-3.cropped::before,
 .section-4.cropped::before {
   background-position: center -130px;
-  border: 3px solid blue;
 }
 
 /* 텍스트박스 시작*/
